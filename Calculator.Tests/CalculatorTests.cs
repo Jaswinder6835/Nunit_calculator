@@ -1,0 +1,57 @@
+using NUnit.Framework;
+using Calculator.Controllers;
+
+namespace Calculator.Tests
+{
+    [Parallelizable(ParallelScope.All)]
+    public class CalculatorTests
+    {
+        private CalculatorController calculatorController;
+
+        [SetUp]
+        public void Setup()
+        {
+            calculatorController = new CalculatorController();
+        }
+
+        [Test]
+        [TestCase(10, 93.7, 103.7)]
+        [TestCase(2, 7, 9)]
+        [TestCase(-4, 48, 44)]
+        public void WhenAdditionIsPerformed(double firstNumber, double secondNumber, double expectedResult)
+        {
+            double actualResult = calculatorController.Addition(firstNumber, secondNumber);
+            Assert.AreEqual(actualResult, expectedResult);
+        }
+
+        [Test]
+        [TestCase(9864, 78536, -68672)]
+        [TestCase(32, -96, 128)]
+        [TestCase(4546, 343, 4203)]
+        public void WhenSubtractionIsPerformed(double firstNumber, double secondNumber, double expectedResult)
+        {
+            double actualResult = calculatorController.Subtraction(firstNumber, secondNumber);
+            Assert.AreEqual(actualResult, expectedResult);
+        }
+
+        [Test]
+        [TestCase(4, 6, 24)]
+        [TestCase(51686, 6454, 333581444)]
+        [TestCase(-629, 27, -16983)]
+        public void WhenMultiplicationIsPerformed(double firstNumber, double secondNumber, double expectedResult)
+        {
+            double actualResult = calculatorController.Multiplication(firstNumber, secondNumber);
+            Assert.AreEqual(actualResult, expectedResult);
+        }
+
+        [Test]
+        [TestCase(103, 2, 51.5)]
+        [TestCase(-4689, 33, -142.09090909090909)]
+        [TestCase(22, 7, 3.1428571428571428)]
+        public void WhenDivisionIsPerformed(double firstNumber, double secondNumber, double expectedResult)
+        {
+            double actualResult = calculatorController.Division(firstNumber, secondNumber);
+            Assert.AreEqual(actualResult, expectedResult);
+        }
+    }
+}
